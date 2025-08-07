@@ -8,6 +8,8 @@ import { DislikeButton } from "../full-size-puzzle/DislikeButton"
 import "../full-size-puzzle/FullSizePuzzle.css"
 import "./PuzzlePlayer.css"
 
+// This is making the array for the notes. There is a subarray of 9 because of there are
+// 9 possible numbers that can be used as a note.
 const make2dArray = () => {
     let arr = []
 
@@ -61,6 +63,13 @@ export const PuzzlePlayer = () => {
         getLikeStatus()
     }, [])
 
+    // PlayerBoard - stores and displays the "big" numbers.
+    // NotesBoard - stores and displays the notes.
+    // InputBoard - this board accepts inputs for both notes and "big" numbers.
+    
+    // I have three overlapping boards. The input board is the top one. The two boards below simply reflect the state of the board
+    // after various changes to the initial state. I believe the reason I did this was mostly because of the notes. I couldn't have
+    // a single form input with multiple values, so I needed a more sophisticated solution.
     return (
         <section className="puzzle-container">
             <PlayerBoard playerBoard={playerBoard} puzzle={puzzle}/>

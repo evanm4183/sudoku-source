@@ -33,12 +33,12 @@ export const PuzzleGridForm = ({boardArr, updateArr, idName, isSolution, updateE
     return (
         <article className="grid-container">
             {
-                boardArr.map((cell, index) => {
+                boardArr.map((cell, index) => { // cell represents the value in the cell (poorly named)
                     return (
                         <input 
                             type="text" 
                             className={determineClass(index)} 
-                            value={determineValue(cell)}
+                            value={determineValue(cell)} 
                             id={`${idName}--${index}`}
                             key={index}
                             maxLength="1"

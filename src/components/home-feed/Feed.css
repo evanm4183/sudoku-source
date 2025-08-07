@@ -18,6 +18,8 @@
     font-size: 17px;
 }
 
+/* I'm using margin here instead of changiung the border width because the background color of the container is black
+By pushing the cells further away from each other, I'm giving the illusion that the borders are thicker. */
 .side-border-cell-mini {
     display: flex;
     justify-content: center;

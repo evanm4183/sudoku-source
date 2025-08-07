@@ -7,17 +7,21 @@ const getRandomInt = (upperBound) => { //returns a random int in the range of [0
 
 const attemptSolution = (board) => { //attempts to generate a solved Sudoku
     let rowNum = 0
-    let rowIndex = 0
+    let rowIndex = 0 // This is the column. Not sure why I didn't name it col or something like that.
     let availableNumbers
 
     while (true) {
         availableNumbers = convertToArray(getAvailableNumbers(board, [rowNum, rowIndex]))
         board[rowNum][rowIndex] = availableNumbers[getRandomInt(availableNumbers.length)]
-
+        // getRandomInt is intended to return an random index in the availableNumbers arrary.
+        
+        // Generating the solution in a "reverse L" pattern.
+        // I believe it worked better when doing it this way as opposed to a row by row pattern.
         if (rowNum === 8 && rowIndex === 8) {
             break
         }
         
+        // I'm starting a rowIndex + 1 and rowNum because I don't want to "double count" the corner index.
         for (let i = rowIndex + 1; i < 9; i++) {
             availableNumbers = convertToArray(getAvailableNumbers(board, [rowNum, i]))
             board[rowNum][i] = availableNumbers[getRandomInt(availableNumbers.length)]

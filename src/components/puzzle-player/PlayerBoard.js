@@ -31,6 +31,8 @@ export const PlayerBoard = ({playerBoard, puzzle}) => {
                                 key={index}
                             >{showCell(cell)}</div> 
                         )
+                        // The permanent class, as the name suggests, is a number that can't be changed.
+                        // It is displayed as black.
                     }
 
                     return (
@@ -39,7 +41,8 @@ export const PlayerBoard = ({playerBoard, puzzle}) => {
                             key={index}
                         >{showCell(cell)}</div>
                         )
-                    
+                        // The bottom class is for numbers that can be changed. These are displayed as purple.
+                        // Not 100% sure why it's name "bottom". I think it's because it's supposed to be on the bottom layer.
                 })
             }
         </div>

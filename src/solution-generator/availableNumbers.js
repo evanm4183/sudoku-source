@@ -14,7 +14,9 @@ const getBoundary = (index) => { //returns the boundary of the block for a given
 
 const filterNumbersByBlock = (board, availableNumbers, verticalBoundary, horizontalBoundary) => { //eliminates the number in the same block and returns an availableNumbers object
     let currentCoord = [verticalBoundary[0], horizontalBoundary[0]] //startCoord should be an array in the form [rowNum, rowIndex]
+    // currentCoord starts in the top left hand corner of the block.
 
+    // Not sure why I didn't make this a double for loop. Would've been much easier to understand.
     while (currentCoord[0] <= verticalBoundary[1] && currentCoord[1] <= horizontalBoundary[1]) {
         if (board[currentCoord[0]][currentCoord[1]] !== 0) { //checks if the coord has a non-zero number, if it does that number is marked as unavailable
             availableNumbers[board[currentCoord[0]][currentCoord[1]]] = false
@@ -43,7 +45,7 @@ const filterNumbersByRow = (board, availableNumbers, horizontalBoundary, rowNum)
                 availableNumbers[board[rowNum][i]] = false
             }
         }
-    } else if (horizontalBoundary[1] === 8) {
+    } else if (horizontalBoundary[1] === 8) { // Should've been consistent with using horizontalBoundary[0]
         for (let i = 0; i < 6; i++) {
             if (board[rowNum][i] !== 0) {
                 availableNumbers[board[rowNum][i]] = false
@@ -99,6 +101,9 @@ const filterNumbersbyColumn = (board, availableNumbers, verticalBoundary, rowInd
 
 export const getAvailableNumbers = (board, coord) => {
     let availableNumbers = resetAvailableNumbers()
+
+    // There's a tricky inversion of expectations here. The "x" coord is used to determine the vertical boundary,
+    // and the "y" coord is used to determine the horizontal boundary. Ex coord [6, 0].
     let verticalBoundary = getBoundary(coord[0])
     let horizontalBoundary = getBoundary(coord[1])
 

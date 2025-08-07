@@ -16,6 +16,7 @@ const validInput = (char) => {
     return ((asciiVal >= 49 && asciiVal <= 57) || char.toLowerCase() === "e") 
 }
 
+// All I'm doing is checking the current state of the board against the solution.
 const puzzleSolved = (solution, playerBoard) => {
     for (let i = 0; i < 81; i++) {
         if (solution[i] !== playerBoard[i]) {
@@ -32,6 +33,7 @@ export const InputBoard = ({puzzle, notes, notesToggled, setNotes, playerBoard, 
         const playerCopy = [...playerBoard]
         const notesCopy = [...notes]
 
+        // "e" is the key I'm using to erase numbers.
         if (e.target.value.toLowerCase() === "e") {
             playerCopy[index] = "_"
             setPlayerBoard(playerCopy)
@@ -46,14 +48,15 @@ export const InputBoard = ({puzzle, notes, notesToggled, setNotes, playerBoard, 
 
         if (notesToggled) {
 
-            if (notes[index][input - 1] !== "_") {
+            if (notes[index][input - 1] !== "_") { // If you input a number that is already present, remove that number.
                 notesCopy[index][input - 1] = "_"
                 setNotes(notesCopy)
             } else {
                 notesCopy[index][input - 1] = input
                 setNotes(notesCopy)
             }
-
+            
+            // If there is a "big" number in the cell, erase it before adding the note.
             playerCopy[index] = "_"
             setPlayerBoard(playerCopy)
         } 
@@ -79,6 +82,7 @@ export const InputBoard = ({puzzle, notes, notesToggled, setNotes, playerBoard, 
     return (
         <div className="input-grid-container">
             {
+                // I'm only returning an editable box for those cells that are empty.
                 puzzle?.display?.map((cell, index) => {
                     if (cell === 0 || cell === "_") {
                         return (
